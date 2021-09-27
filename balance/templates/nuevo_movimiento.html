@@ -4,32 +4,28 @@
 
 {% block contenido_pagina %}
             <h1>Alta de movimiento</h1>
-            {% for error in errores %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
 
             <form action="/nuevo" method="post">
                 <div class="campo-formulario">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" name="fecha" id="fecha" value={{form.fecha}}>   
+                    {{ el_formulario.fecha.label() }}
+                    {{ el_formulario.fecha(type="date") }}
                 </div>
                 <div class="campo-formulario">
-                    <label for="concepto">Concepto:</label>
-                    <input type="text" name="concepto" id="concepto" value={{form.concepto}}>
+                    {{ el_formulario.concepto.label() }}
+                    {{ el_formulario.concepto(placeholder="Lo que diga Felipe") }}
                 </div>
                 <div class="campo-formulario">
-                    <input type="radio" name="ingreso_gasto" id="ingreso" value="I"><span class="label">Ingreso</span>  
-                    <input type="radio" name="ingreso_gasto" id="gasto" value="G"><span class="label">Gasto</span>
+                    {% for subfield in el_formulario.ingreso_gasto %}
+                        {{ subfield }} {{ subfield.label }}
+                    {% endfor %}
                 </div>
                 <div class="campo-formulario">
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="text" name="cantidad" id="cantidad" value={{form.cantidad}}>
+                    {{ el_formulario.cantidad.label() }}
+                    {{ el_formulario.cantidad() }}
                 </div>
 
-                <input name="submit" class="blue-button" type="submit" value="Enviar">
+                {{ el_formulario.submit() }}
  
             </form>
-
-
 
 {% endblock%}
